@@ -1,0 +1,32 @@
+<div class="container-title">
+    <div>
+        <h1 class="title">ToDo List</h1>
+    </div>
+</div>
+
+<div class="container-total">
+    <div class="container">
+        <input class="input" style="width:80%" (keydown)="enterAddElement($event)" type="text"
+            placeholder="Add things to the list">
+    </div>
+    <hr class="hr">
+    <div class="container">
+        <button class="button" (click)="addToList()">ADD</button>
+        <button class="button" (click)="cleanCompleted()">CLEAN COMPLETE</button>
+        <button class="button" (click)="deleteAll()">DELETE LIST</button>
+    </div>
+
+    <div class="todos" *ngFor="let item of todoList; let i = index" [ngClass]="{'row-completed':item.completed===true , 
+    'row-odd':i%2 !==0, 'row-even':i%2 === 0}">
+        <div>
+            <p>{{ item.name }}</p>
+        </div>
+        <div class="post-buttons">
+            <button *ngIf="item.completed === false" class="button-completed-element"
+                (click)="completedTask(i)">COMPLETED</button>
+            <button *ngIf="item.completed === false" class="button-pospone-element"
+                (click)="posposedTask(i)">POSPONE</button>
+            <button class="button-delete-element" (click)="deleteElement(i)">DELETE</button>
+        </div>
+    </div>
+</div>
